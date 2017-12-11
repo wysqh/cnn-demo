@@ -98,9 +98,10 @@ if __name__ == "__main__":
     print(y_val)
     train_accuracy = numpy.mean(numpy.equal(y_test, classes_train))
     print("Train accuracy: ", train_accuracy )
+
+    test_classes = model.predict_classes(X_test)
     print()
     print("Test Period =>  ")
-    test_classes = model.predict_classes(X_test)
     print(test_classes)
     print(y_test)
     test_accuracy = numpy.mean(numpy.equal(y_test, test_classes))
