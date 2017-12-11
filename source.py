@@ -65,7 +65,7 @@ def Net_Model(lr=0.01, decay=1e-6, momentum=0.9):
 
 
 def train_model(model, x_train, y_train, x_val, y_val):
-    model.fit(x_train, y_train, validation_data=(x_val, y_val), batch_size=40, epochs=40)
+    model.fit(x_train, y_train, validation_data=(x_val, y_val), batch_size=40, epochs=40, verbose=2)
     model.save_weights('model_weight.h5', overwrite=True)
     return model
 
@@ -91,18 +91,17 @@ if __name__ == "__main__":
     train_model(model, X_train, Y_train, X_val, Y_val)
     score = test_model(model, X_test, Y_test)
 
-    print()
-    classes_train = model.predict_classes(X_val)
+    classes_train = model.predict_classes(X_test)
     print()
     print("Train Period => ")
     print(classes_train)
     print(y_val)
-    test_accuracy = numpy.mean(numpy.equal(y_val, classes_train))
-    print("accuracy: ", test_accuracy)
+    train_accuracy = numpy.mean(numpy.equal(y_test, classes_train))
+    print("Train accuracy: ", train_accuracy )
     print()
-    print("Test Period =>git ")
-    classes = model.predict_classes(X_test)
-    print(classes)
+    print("Test Period =>  ")
+    test_classes = model.predict_classes(X_test)
+    print(test_classes)
     print(y_test)
-    test_accuracy = numpy.mean(numpy.equal(y_test, classes))
-    print("accuracy: ", test_accuracy)
+    test_accuracy = numpy.mean(numpy.equal(y_test, test_classes))
+    print("Test accuracy: ", test_accuracy)
